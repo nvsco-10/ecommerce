@@ -38,18 +38,18 @@ const SignUpForm = () => {
     try {
       // firebase authenticate
       const { user } = await createAuthUserWithEmailAndPassword(email, password);
-      
+
       // add user to database, pass on display name
-      createUserDocumentFromAuth(user, { displayName })
-      resetFormFields()
-      
+      createUserDocumentFromAuth(user, { displayName });
+
+      resetFormFields();
     } catch (error) {
       if(error.code === "auth/weak-password") {
-        alert("Password should be at least 6 characters.")
+        alert("Password should be at least 6 characters.");
       }
 
       if(error.code === "auth/email-already-in-use") {
-        alert("Email already in use.")
+        alert("Email already in use.");
       }
     }
 
