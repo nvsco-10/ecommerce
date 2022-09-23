@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 import { rootReducer } from './root-reducer';
 
@@ -14,10 +15,10 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// use middleware only if in development mode
-const middleWares = [process.env.NODE_ENV === 'development' && logger].filter(
-  Boolean
-);
+// use logger and thunk middleware only if in development mode
+const middleWares = [
+  process.env.NODE_ENV === 'development' && logger, thunk
+  ].filter(Boolean);
 
 // set up redux dev tools for app
 const composeEnhancer = 
